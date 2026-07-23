@@ -8,7 +8,7 @@ function analyze() {
         caffeine: document.getElementById("caffeine").value
     };
 
-    fetch("https://burnout-focus-guardian-4.onrender.com", {
+    fetch("https://burnout-focus-guardian-4.onrender.com/analyze", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -24,9 +24,9 @@ function analyze() {
     .then(result => {
 
         document.getElementById("result").innerHTML = `
-            <h3>Risk Score : ${result.risk_score}</h3>
-            <h3>Risk Level : ${result.risk_level}</h3>
-            <h3>Health Score : ${result.health_score}</h3>
+            <h3>Risk Score: ${result.risk_score}</h3>
+            <h3>Risk Level: ${result.risk_level}</h3>
+            <h3>Health Score: ${result.health_score}</h3>
 
             <p><b>Causes:</b><br>${result.causes.join("<br>")}</p>
 
@@ -41,9 +41,10 @@ function analyze() {
 
     })
     .catch(error => {
-        console.log(error);
+        console.error(error);
+
         document.getElementById("result").innerHTML =
-            "<h2 style='color:red;'>Unable to connect to Flask Backend</h2>";
+        "<h2 style='color:red;'>Unable to connect to Flask Backend</h2>";
     });
 
 }
